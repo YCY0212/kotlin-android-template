@@ -64,6 +64,9 @@ dependencies {
     implementation(libs.androidx.constraint.layout)
     implementation(libs.androidx.core.ktx)
 
+    // ✅ YouTube Player 라이브러리 추가
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+
     testImplementation(libs.junit)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
