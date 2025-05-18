@@ -2,11 +2,9 @@ package com.ncorti.kotlin.template.app
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ncorti.kotlin.template.app.databinding.ActivityMainBinding
-import com.ncorti.kotlin.template.library.FactorialCalculator
-import com.ncorti.kotlin.template.library.android.ToastUtil
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,27 +15,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonCompute.setOnClickListener {
-            val message = if (binding.editTextFactorial.text.isNotEmpty()) {
-                val input = binding.editTextFactorial.text.toString().toLong()
-                val result = try {
-                    FactorialCalculator.computeFactorial(input).toString()
-                } catch (ex: IllegalStateException) {
-                    "Error: ${ex.message}"
-                }
-
-                binding.textResult.text = result
-                binding.textResult.visibility = View.VISIBLE
-                getString(R.string.notification_title, result)
+        binding.buttonConvert.setOnClickListener {
+            val youtubeUrl = binding.editTextYoutube.text.toString()
+            if (youtubeUrl.isNotBlank()) {
+                val intent = Intent(this, NextActivity2::class.java)
+                intent.putExtra("youtube_url", youtubeUrl)
+                startActivity(intent)
             } else {
-                getString(R.string.please_enter_a_number)
+                Toast.makeText(this, "유튜브 링크를 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
-            ToastUtil.showToast(this, message)
-        }
-
-        binding.buttonAppcompose.setOnClickListener {
-            val intent = Intent(it.context, ComposeActivity::class.java)
-            startActivity(intent)
         }
     }
 }
